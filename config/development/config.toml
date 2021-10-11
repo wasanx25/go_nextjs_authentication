@@ -1,0 +1,5 @@
+DatabaseDSN = "go_nextjs_authentication_user:832hf8asdf28@tcp(127.0.0.1:23306)/go_nextjs_authentication?charset=utf8mb4&parseTime=True&loc=Local"
+Auth0Audience = ""
+Auth0Issuer = ""
+AUTH0JWKSURL = ""
+AllowOrigins = ["http://localhost:3000"]
