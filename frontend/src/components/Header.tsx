@@ -1,21 +1,20 @@
 import { Box, Button, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/react'
 import { DarkModeSwitch } from './DarkModeSwitch'
 import { PostsDialog } from './PostsDialog'
+import { useUser } from '@auth0/nextjs-auth0'
 
-interface HeaderProps {
-  username: string
-}
+export const Header = () => {
+  const {user} = useUser()
 
-export const Header = (props: HeaderProps) => {
   return (
-    <Flex width='100%' p='1rem' borderBottom='1px' borderColor="gray.200">
+    <Flex as="header" width='100%' p='1rem' borderBottom='1px' borderColor='gray.200'>
       <Box py='2'>
         <Heading size='md'>Application Title</Heading>
       </Box>
       <Spacer/>
       <Box>
         <Stack direction={['column', 'row']} spacing='0.5rem' alignItems='center'>
-          <Text display='inline-block'>{props.username}</Text>
+          <Text display='inline-block'>{user.name}</Text>
 
           <PostsDialog/>
 

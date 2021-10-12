@@ -1,10 +1,10 @@
-import { Layout } from '../components/Layout'
 import { FollowUserList } from '../components/FollowUserList'
+import { AuthedTemplate } from '../components/AuthedTemplate'
 
 export default function Follows () {
   return (
-    <Layout>
+    <AuthedTemplate>
       <FollowUserList/>
-    </Layout>
+    </AuthedTemplate>
   )
 }

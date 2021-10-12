@@ -1,10 +1,10 @@
 import { UserList } from '../components/UserList'
-import { Layout } from '../components/Layout'
+import { AuthedTemplate } from '../components/AuthedTemplate'
 
 export default function Users () {
   return (
-    <Layout>
+    <AuthedTemplate>
       <UserList/>
-    </Layout>
+    </AuthedTemplate>
   )
 }

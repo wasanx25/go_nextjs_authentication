@@ -1,10 +1,10 @@
 import { Timeline } from '../components/Timeline'
-import { Layout } from '../components/Layout'
+import { AuthedTemplate } from '../components/AuthedTemplate'
 
 export default function Index () {
   return (
-    <Layout>
+    <AuthedTemplate>
       <Timeline/>
-    </Layout>
+    </AuthedTemplate>
   )
 }
