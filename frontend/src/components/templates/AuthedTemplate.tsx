@@ -1,8 +1,8 @@
 import { Button } from '@chakra-ui/react'
 import React, { ReactNode } from 'react'
-import { Container } from './Container'
+import { Container } from '../Container'
 import { useUser } from '@auth0/nextjs-auth0'
-import { Layout } from './Layout'
+import { Layout } from '../Layout'
 
 export const AuthedTemplate: React.FC<{children: ReactNode}> = ({children}) => {
   const {user, error, isLoading} = useUser()

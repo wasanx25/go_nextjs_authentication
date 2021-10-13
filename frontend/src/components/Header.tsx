@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/react'
 import { DarkModeSwitch } from './uiParts/DarkModeSwitch'
 import { useUser } from '@auth0/nextjs-auth0'
-import { UserPosts } from './templates/UserPosts'
+import { UserPosts } from './organisms/UserPosts'
 
 export const Header = () => {
   const {user} = useUser()
