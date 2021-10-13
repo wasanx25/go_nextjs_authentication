@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/react'
 import { DarkModeSwitch } from './DarkModeSwitch'
-import { PostsDialog } from './PostsDialog'
 import { useUser } from '@auth0/nextjs-auth0'
+import { UserPosts } from './templates/UserPosts'
 
 export const Header = () => {
   const {user} = useUser()
@@ -16,7 +16,7 @@ export const Header = () => {
         <Stack direction={['column', 'row']} spacing='0.5rem' alignItems='center'>
           <Text display='inline-block'>{user.name}</Text>
 
-          <PostsDialog/>
+          <UserPosts/>
 
           <Button colorScheme='teal' variant='outline'>
             <a href='/api/auth/logout'>Logout</a>
