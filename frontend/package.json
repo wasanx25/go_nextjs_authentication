@@ -6,7 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "1.5.0",
+    "@auth0/nextjs-auth0": "1.6.1",
     "@chakra-ui/icons": "1.0.15",
     "@chakra-ui/react": "1.6.8",
     "@chakra-ui/theme-tools": "1.1.2",
