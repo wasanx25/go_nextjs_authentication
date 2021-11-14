@@ -4,5 +4,23 @@
     "config:base"
   ],
   "timezone": "Asia/Tokyo",
-  "schedule": ["before 12pm"]
+  "schedule": ["before 12pm"],
+  "packageRules": [
+    {
+      "matchPackageNames": ["@auth0/nextjs-auth0"]
+    },
+    {
+      "matchPackagePatterns": ["^@chakra-ui/*", "@emotion/*", "frame-motion"],
+      "groupName": "style libs"
+    },
+    {
+      "matchPackagePatterns": "next"
+    },
+    {
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"]
+    },
+    {
+      matchPackageNames: ["typescript", "@types/node"]
+    }
+  ]
 }
