@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wasanx25/go_nextjs_authentication/model"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	model2 "github.com/wasanx25/go_nextjs_authentication/backend/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/repository"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -22,7 +22,7 @@ func TestUserRepository_FindByUsername(t *testing.T) {
 	connection, err := db.DB()
 	defer connection.Close()
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: 1, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: username, Auth0UserID: "test_auth0_user_id_1"},
 	})
 
@@ -35,7 +35,7 @@ func TestUserRepository_FindByUsername(t *testing.T) {
 	}
 
 	// then
-	expected := &model.User{
+	expected := &model2.User{
 		Model: gorm.Model{ID: 1, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test1", Auth0UserID: "test_auth0_user_id_1",
 	}
 	assert.Equal(t, expected, actual)
@@ -55,7 +55,7 @@ func TestUserRepository_FindByVendorUserID(t *testing.T) {
 	connection, err := db.DB()
 	defer connection.Close()
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: 1, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test1", Auth0UserID: vendorUserID},
 	})
 
@@ -68,7 +68,7 @@ func TestUserRepository_FindByVendorUserID(t *testing.T) {
 	}
 
 	// then
-	expected := &model.User{
+	expected := &model2.User{
 		Model: gorm.Model{ID: 1, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test1", Auth0UserID: "test_auth0_user_id_1",
 	}
 	assert.Equal(t, expected, actual)
@@ -88,7 +88,7 @@ func TestUserRepository_FindNoFollowUsersByUserID(t *testing.T) {
 
 	userID := uint(1)
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: userID, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test1", Auth0UserID: "test_auth0_user_id_1"},
 		{Model: gorm.Model{ID: 2, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test2", Auth0UserID: "test_auth0_user_id_2"},
 		{Model: gorm.Model{ID: 3, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test3", Auth0UserID: "test_auth0_user_id_3"},
@@ -96,7 +96,7 @@ func TestUserRepository_FindNoFollowUsersByUserID(t *testing.T) {
 		{Model: gorm.Model{ID: 5, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test5", Auth0UserID: "test_auth0_user_id_5"},
 	})
 
-	db.Create([]*model.Follow{
+	db.Create([]*model2.Follow{
 		{From: userID, To: 2, FollowedAt: time.Unix(0, 0)},
 		{From: userID, To: 3, FollowedAt: time.Unix(0, 0)},
 	})
@@ -110,7 +110,7 @@ func TestUserRepository_FindNoFollowUsersByUserID(t *testing.T) {
 	}
 
 	// then
-	expected := []*model.User{
+	expected := []*model2.User{
 		{Model: gorm.Model{ID: 4, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test4", Auth0UserID: "test_auth0_user_id_4"},
 		{Model: gorm.Model{ID: 5, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test5", Auth0UserID: "test_auth0_user_id_5"},
 	}
@@ -131,7 +131,7 @@ func TestUserRepository_FindFollowUsersByUserID(t *testing.T) {
 
 	userID := uint(1)
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: userID, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test1", Auth0UserID: "test_auth0_user_id_1"},
 		{Model: gorm.Model{ID: 2, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test2", Auth0UserID: "test_auth0_user_id_2"},
 		{Model: gorm.Model{ID: 3, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test3", Auth0UserID: "test_auth0_user_id_3"},
@@ -139,7 +139,7 @@ func TestUserRepository_FindFollowUsersByUserID(t *testing.T) {
 		{Model: gorm.Model{ID: 5, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test5", Auth0UserID: "test_auth0_user_id_5"},
 	})
 
-	db.Create([]*model.Follow{
+	db.Create([]*model2.Follow{
 		{From: userID, To: 2, FollowedAt: time.Unix(0, 0)},
 		{From: userID, To: 3, FollowedAt: time.Unix(1000, 0)},
 	})
@@ -153,7 +153,7 @@ func TestUserRepository_FindFollowUsersByUserID(t *testing.T) {
 	}
 
 	// then
-	expected := []*model.User{
+	expected := []*model2.User{
 		{Model: gorm.Model{ID: 3, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test3", Auth0UserID: "test_auth0_user_id_3"},
 		{Model: gorm.Model{ID: 2, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, Username: "test2", Auth0UserID: "test_auth0_user_id_2"},
 	}
@@ -174,7 +174,7 @@ func TestUserRepository_CreateIfNotExists(t *testing.T) {
 	connection, err := db.DB()
 	defer connection.Close()
 
-	user := model.User{Username: username, Auth0UserID: "test_auth0_user_id_1"}
+	user := model2.User{Username: username, Auth0UserID: "test_auth0_user_id_1"}
 
 	sut := repository.NewUserRepository(db)
 

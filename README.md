@@ -9,7 +9,7 @@
 ### config
 
 ```shell
-cp config/development/config.toml .
+cp backend/config/development/config.toml backend/
 ```
 
 Set Auth0 properties
@@ -25,18 +25,21 @@ docker-compose up -d
 DB migration
 
 ```shell
+cd backend
 go run cmd/migration/main.go
 ```
 
 Create seed data
 
 ```shell
+cd backend
 go run cmd/seed/main.go
 ```
 
 ### Run
 
 ```shell
+cd backend
 go run main.go
 ```
 

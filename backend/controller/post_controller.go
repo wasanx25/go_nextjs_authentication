@@ -8,16 +8,16 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
-	"github.com/wasanx25/go_nextjs_authentication/authentication"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	"github.com/wasanx25/go_nextjs_authentication/backend/authentication"
+	repository2 "github.com/wasanx25/go_nextjs_authentication/backend/repository"
 )
 
 type PostController struct {
-	postRepository repository.PostRepositoryInterface
-	userRepository repository.UserRepositoryInterface
+	postRepository repository2.PostRepositoryInterface
+	userRepository repository2.UserRepositoryInterface
 }
 
-func NewPostController(postRepository repository.PostRepositoryInterface, userRepository repository.UserRepositoryInterface) *PostController {
+func NewPostController(postRepository repository2.PostRepositoryInterface, userRepository repository2.UserRepositoryInterface) *PostController {
 	return &PostController{
 		postRepository: postRepository,
 		userRepository: userRepository,

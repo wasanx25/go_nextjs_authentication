@@ -8,8 +8,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
-	"github.com/wasanx25/go_nextjs_authentication/controller"
-	"github.com/wasanx25/go_nextjs_authentication/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/controller"
+	model2 "github.com/wasanx25/go_nextjs_authentication/backend/model"
 	"gorm.io/gorm"
 )
 
@@ -19,9 +19,9 @@ func TestTimelineController_Index(t *testing.T) {
 	loginAuth0UserID := "test_auth0_user_id"
 
 	userRepositoryMock := new(userRepositoryMock)
-	userRepositoryMock.On("FindByAuth0UserID", loginAuth0UserID).Return(&model.User{Model: gorm.Model{ID: loginUserID}}, nil)
+	userRepositoryMock.On("FindByAuth0UserID", loginAuth0UserID).Return(&model2.User{Model: gorm.Model{ID: loginUserID}}, nil)
 
-	posts := []*model.Post{
+	posts := []*model2.Post{
 		{
 			Model: gorm.Model{
 				ID: 1,
@@ -74,9 +74,9 @@ func TestTimelineController_Index_EmptySlice(t *testing.T) {
 	loginAuth0UserID := "test_auth0_user_id"
 
 	userRepositoryMock := new(userRepositoryMock)
-	userRepositoryMock.On("FindByAuth0UserID", loginAuth0UserID).Return(&model.User{Model: gorm.Model{ID: loginUserID}}, nil)
+	userRepositoryMock.On("FindByAuth0UserID", loginAuth0UserID).Return(&model2.User{Model: gorm.Model{ID: loginUserID}}, nil)
 
-	var posts []*model.Post
+	var posts []*model2.Post
 	postRepositoryMock := new(postRepositoryMock)
 	postRepositoryMock.On("FindAllByFolloweeId", loginUserID).Return(posts, nil)
 
@@ -109,10 +109,10 @@ func TestTimelineController_Index_InternalServerError(t *testing.T) {
 	loginAuth0UserID := "test_auth0_user_id"
 
 	userRepositoryMock := new(userRepositoryMock)
-	userRepositoryMock.On("FindByAuth0UserID", loginAuth0UserID).Return(&model.User{Model: gorm.Model{ID: loginUserID}}, nil)
+	userRepositoryMock.On("FindByAuth0UserID", loginAuth0UserID).Return(&model2.User{Model: gorm.Model{ID: loginUserID}}, nil)
 
 	postRepositoryMock := new(postRepositoryMock)
-	postRepositoryMock.On("FindAllByFolloweeId", loginUserID).Return([]*model.Post{}, gorm.ErrInvalidDB)
+	postRepositoryMock.On("FindAllByFolloweeId", loginUserID).Return([]*model2.Post{}, gorm.ErrInvalidDB)
 
 	request := httptest.NewRequest(http.MethodGet, "/", nil)
 	recorder := httptest.NewRecorder()

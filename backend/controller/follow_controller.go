@@ -9,16 +9,16 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
-	"github.com/wasanx25/go_nextjs_authentication/authentication"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	"github.com/wasanx25/go_nextjs_authentication/backend/authentication"
+	repository2 "github.com/wasanx25/go_nextjs_authentication/backend/repository"
 )
 
 type FollowController struct {
-	followRepository repository.FollowRepositoryInterface
-	userRepository   repository.UserRepositoryInterface
+	followRepository repository2.FollowRepositoryInterface
+	userRepository   repository2.UserRepositoryInterface
 }
 
-func NewFollowController(followRepository repository.FollowRepositoryInterface, userRepository repository.UserRepositoryInterface) *FollowController {
+func NewFollowController(followRepository repository2.FollowRepositoryInterface, userRepository repository2.UserRepositoryInterface) *FollowController {
 	return &FollowController{
 		followRepository: followRepository,
 		userRepository:   userRepository,

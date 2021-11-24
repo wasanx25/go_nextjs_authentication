@@ -7,13 +7,13 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
-	"github.com/wasanx25/go_nextjs_authentication/authentication"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	"github.com/wasanx25/go_nextjs_authentication/backend/authentication"
+	repository2 "github.com/wasanx25/go_nextjs_authentication/backend/repository"
 )
 
 type TimelineController struct {
-	postRepository repository.PostRepositoryInterface
-	userRepository repository.UserRepositoryInterface
+	postRepository repository2.PostRepositoryInterface
+	userRepository repository2.UserRepositoryInterface
 }
 
 type PostViewModel struct {
@@ -27,7 +27,7 @@ type TimelineViewModel struct {
 	Posts []PostViewModel `json:"posts"`
 }
 
-func NewTimelineController(postRepository repository.PostRepositoryInterface, userRepository repository.UserRepositoryInterface) *TimelineController {
+func NewTimelineController(postRepository repository2.PostRepositoryInterface, userRepository repository2.UserRepositoryInterface) *TimelineController {
 	return &TimelineController{
 		postRepository: postRepository,
 		userRepository: userRepository,

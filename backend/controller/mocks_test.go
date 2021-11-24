@@ -8,8 +8,8 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/mock"
-	"github.com/wasanx25/go_nextjs_authentication/authentication"
-	"github.com/wasanx25/go_nextjs_authentication/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/authentication"
+	model2 "github.com/wasanx25/go_nextjs_authentication/backend/model"
 )
 
 func createJWTToken(username string, auth0UserID string) *jwt.Token {
@@ -53,27 +53,27 @@ type userRepositoryMock struct {
 	mock.Mock
 }
 
-func (u *userRepositoryMock) FindByUsername(username string) (user *model.User, err error) {
+func (u *userRepositoryMock) FindByUsername(username string) (user *model2.User, err error) {
 	args := u.Called(username)
-	return args.Get(0).(*model.User), args.Error(1)
+	return args.Get(0).(*model2.User), args.Error(1)
 }
 
-func (u *userRepositoryMock) FindByAuth0UserID(id string) (user *model.User, err error) {
+func (u *userRepositoryMock) FindByAuth0UserID(id string) (user *model2.User, err error) {
 	args := u.Called(id)
-	return args.Get(0).(*model.User), args.Error(1)
+	return args.Get(0).(*model2.User), args.Error(1)
 }
 
-func (u *userRepositoryMock) FindNoFollowUsersByUserID(id uint) (users []*model.User, err error) {
+func (u *userRepositoryMock) FindNoFollowUsersByUserID(id uint) (users []*model2.User, err error) {
 	args := u.Called(id)
-	return args.Get(0).([]*model.User), args.Error(1)
+	return args.Get(0).([]*model2.User), args.Error(1)
 }
 
-func (u *userRepositoryMock) FindFollowUsersByUserID(id uint) (users []*model.User, err error) {
+func (u *userRepositoryMock) FindFollowUsersByUserID(id uint) (users []*model2.User, err error) {
 	args := u.Called(id)
-	return args.Get(0).([]*model.User), args.Error(1)
+	return args.Get(0).([]*model2.User), args.Error(1)
 }
 
-func (u *userRepositoryMock) CreateIfNotExists(user model.User) error {
+func (u *userRepositoryMock) CreateIfNotExists(user model2.User) error {
 	args := u.Called(user)
 	return args.Error(0)
 }
@@ -82,9 +82,9 @@ type postRepositoryMock struct {
 	mock.Mock
 }
 
-func (t *postRepositoryMock) FindAllByFolloweeId(id uint) (posts []*model.Post, err error) {
+func (t *postRepositoryMock) FindAllByFolloweeId(id uint) (posts []*model2.Post, err error) {
 	args := t.Called(id)
-	return args.Get(0).([]*model.Post), args.Error(1)
+	return args.Get(0).([]*model2.Post), args.Error(1)
 }
 
 func (t *postRepositoryMock) Create(userID uint, text string, postedAt time.Time) error {

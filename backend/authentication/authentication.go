@@ -9,9 +9,9 @@ import (
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/wasanx25/go_nextjs_authentication/config"
-	"github.com/wasanx25/go_nextjs_authentication/model"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	"github.com/wasanx25/go_nextjs_authentication/backend/config"
+	"github.com/wasanx25/go_nextjs_authentication/backend/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/repository"
 )
 
 type JWTCustomClaims struct {

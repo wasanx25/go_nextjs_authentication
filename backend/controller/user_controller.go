@@ -6,8 +6,8 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
-	"github.com/wasanx25/go_nextjs_authentication/authentication"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	"github.com/wasanx25/go_nextjs_authentication/backend/authentication"
+	"github.com/wasanx25/go_nextjs_authentication/backend/repository"
 )
 
 type UserController struct {

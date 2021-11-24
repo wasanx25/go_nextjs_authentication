@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wasanx25/go_nextjs_authentication/model"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	model2 "github.com/wasanx25/go_nextjs_authentication/backend/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/repository"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -27,14 +27,14 @@ func TestPostRepository_FindAllByFolloweeId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: fromUserID}, Username: "test1", Auth0UserID: "test_auth0_user_id_1"},
 		{Model: gorm.Model{ID: toUserID}, Username: "test2", Auth0UserID: "test_auth0_user_id_2"},
 	})
-	db.Create([]*model.Follow{
+	db.Create([]*model2.Follow{
 		{From: fromUserID, To: toUserID, FollowedAt: time.Unix(0, 0)},
 	})
-	db.Create([]*model.Post{
+	db.Create([]*model2.Post{
 		{Model: gorm.Model{ID: 1, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, UserID: toUserID, Text: "最初の投稿です！", PostedAt: time.Unix(1000*1000, 0)},
 		{Model: gorm.Model{ID: 2, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, UserID: toUserID, Text: "2回目の投稿です！", PostedAt: time.Unix(2000*1000, 0)},
 		{Model: gorm.Model{ID: 3, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, UserID: toUserID, Text: "3回目の投稿です！", PostedAt: time.Unix(3000*1000, 0)},
@@ -49,7 +49,7 @@ func TestPostRepository_FindAllByFolloweeId(t *testing.T) {
 	}
 
 	// then
-	expected := []*model.Post{
+	expected := []*model2.Post{
 		{Model: gorm.Model{ID: 3, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, UserID: 2, Text: "3回目の投稿です！", PostedAt: time.Unix(3000*1000, 0)},
 		{Model: gorm.Model{ID: 2, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, UserID: 2, Text: "2回目の投稿です！", PostedAt: time.Unix(2000*1000, 0)},
 		{Model: gorm.Model{ID: 1, CreatedAt: time.Unix(0, 0), UpdatedAt: time.Unix(0, 0)}, UserID: 2, Text: "最初の投稿です！", PostedAt: time.Unix(1000*1000, 0)},
@@ -76,7 +76,7 @@ func TestPostRepository_Create(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: postUserID}, Username: "test1", Auth0UserID: "test_auth0_user_id_1"},
 	})
 

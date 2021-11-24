@@ -8,8 +8,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/wasanx25/go_nextjs_authentication/controller"
-	"github.com/wasanx25/go_nextjs_authentication/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/controller"
+	"github.com/wasanx25/go_nextjs_authentication/backend/model"
 	"gorm.io/gorm"
 )
 

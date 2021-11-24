@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wasanx25/go_nextjs_authentication/model"
-	"github.com/wasanx25/go_nextjs_authentication/repository"
+	model2 "github.com/wasanx25/go_nextjs_authentication/backend/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/repository"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -23,7 +23,7 @@ func TestFollowRepository_Create(t *testing.T) {
 	connection, err := db.DB()
 	defer connection.Close()
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: fromUserID}, Username: "test1", Auth0UserID: "test_auth0_user_id_1"},
 		{Model: gorm.Model{ID: toUserID}, Username: "test2", Auth0UserID: "test_auth0_user_id_2"},
 	})
@@ -52,11 +52,11 @@ func TestFollowRepository_Delete(t *testing.T) {
 	connection, err := db.DB()
 	defer connection.Close()
 
-	db.Create([]*model.User{
+	db.Create([]*model2.User{
 		{Model: gorm.Model{ID: fromUserID}, Username: "test1", Auth0UserID: "test_auth0_user_id_1"},
 		{Model: gorm.Model{ID: toUserID}, Username: "test2", Auth0UserID: "test_auth0_user_id_2"},
 	})
-	db.Create([]*model.Follow{
+	db.Create([]*model2.Follow{
 		{From: fromUserID, To: toUserID, FollowedAt: time.Unix(0, 0)},
 	})
 

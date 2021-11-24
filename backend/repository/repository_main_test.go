@@ -10,7 +10,7 @@ import (
 	"github.com/docker/go-connections/nat"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
-	"github.com/wasanx25/go_nextjs_authentication/model"
+	model2 "github.com/wasanx25/go_nextjs_authentication/backend/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -59,7 +59,7 @@ func TestMain(m *testing.M) {
 	connection, err := db.DB()
 	defer connection.Close()
 
-	err = db.AutoMigrate(&model.User{}, &model.Post{}, &model.Follow{})
+	err = db.AutoMigrate(&model2.User{}, &model2.Post{}, &model2.Follow{})
 	if err != nil {
 		log.Fatalln(err)
 	}

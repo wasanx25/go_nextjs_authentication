@@ -1,4 +1,4 @@
-module github.com/wasanx25/go_nextjs_authentication
+module github.com/wasanx25/go_nextjs_authentication/backend
 
 go 1.16
 

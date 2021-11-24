@@ -3,7 +3,7 @@ package repository
 import (
 	"time"
 
-	"github.com/wasanx25/go_nextjs_authentication/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/model"
 	"gorm.io/gorm"
 )
 

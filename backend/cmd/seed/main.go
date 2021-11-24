@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/pelletier/go-toml"
-	"github.com/wasanx25/go_nextjs_authentication/config"
-	"github.com/wasanx25/go_nextjs_authentication/model"
+	"github.com/wasanx25/go_nextjs_authentication/backend/config"
+	"github.com/wasanx25/go_nextjs_authentication/backend/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
