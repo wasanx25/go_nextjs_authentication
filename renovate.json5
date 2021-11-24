@@ -5,6 +5,7 @@
   ],
   "timezone": "Asia/Tokyo",
   "schedule": ["before 12pm"],
+  "reviewers": ["@wasanx25"],
   "packageRules": [
     {
       "matchPackageNames": ["@auth0/nextjs-auth0"]
