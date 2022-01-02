@@ -8,20 +8,24 @@
   "reviewers": ["@wasanx25"],
   "packageRules": [
     {
-      "matchPackageNames": ["@auth0/nextjs-auth0"]
+      "matchPackageNames": ["@auth0/nextjs-auth0"],
+      "groupName": "authentication libraries"
     },
     {
       "matchPackagePatterns": ["^@chakra-ui/*", "@emotion/*", "frame-motion"],
-      "groupName": "style libs"
+      "groupName": "style libraries"
     },
     {
-      "matchPackagePatterns": "next"
+      "matchPackagePatterns": "next",
+      "groupName": "Next.js"
     },
     {
-      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"]
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
+      "groupName": "React and its types"
     },
     {
-      matchPackageNames: ["typescript", "@types/node"]
+      matchPackageNames: ["typescript", "@types/node"],
+      "groupName": "typescript"
     }
   ]
 }
