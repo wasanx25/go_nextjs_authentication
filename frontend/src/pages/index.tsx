@@ -25,9 +25,9 @@ export default function Index () {
     <AuthedTemplate>
       <Flex>
         <List width='100%' border='1px'>
-          {posts.map(p => {
+          {posts.map((p, i) => {
             return (
-              <ListItem p='0.5rem'>
+              <ListItem p='0.5rem' key={i}>
                 <Box>
                   <Text fontSize='lg'>{p.text}</Text>
                   <Text as='time' fontSize='xs' color='gray.400'>{p.posted_at}</Text>

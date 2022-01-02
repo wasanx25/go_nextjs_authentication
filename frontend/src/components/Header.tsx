@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading, Spacer, Stack, Text } from '@chakra-ui/react'
+import Link from 'next/link'
 import { DarkModeSwitch } from './uiParts/DarkModeSwitch'
 import { useUser } from '@auth0/nextjs-auth0'
 import { UserPosts } from './organisms/UserPosts'
@@ -19,7 +20,9 @@ export const Header = () => {
           <UserPosts/>
 
           <Button colorScheme='teal' variant='outline'>
-            <a href='/api/auth/logout'>Logout</a>
+            <Link href='/api/auth/logout'>
+              <a>Logout</a>
+            </Link>
           </Button>
 
           <DarkModeSwitch/>

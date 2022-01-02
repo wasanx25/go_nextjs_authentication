@@ -40,9 +40,9 @@ export default function Follows () {
     <AuthedTemplate>
       <Flex>
         <List width='100%'>
-          {users.map(s => {
+          {users.map((s, i) => {
             return (
-              <ListItem p='0.5rem'>
+              <ListItem p='0.5rem' key={i}>
                 <Stack direction={['column', 'row']}>
                   <Box>
                     <Text>{s.username}</Text>
