@@ -52,7 +52,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-      - run: yarn add global webpack-bundle-diff
+      - run: npm install -g webpack-bundle-diff
       - uses: actions/download-artifact@v2
         with:
           name: stats
