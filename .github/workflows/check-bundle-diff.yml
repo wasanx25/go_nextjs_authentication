@@ -1,0 +1,59 @@
+name: Check Bundle Diff
+
+on: [ push ]
+
+jobs:
+  master-bundle:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+          path: master-repo
+      - name: Use Node.js v16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: yarn
+      - run: yarn build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: stats
+          path: artifact/webpack-stats.json
+
+  current-branch-bundle:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: current-branch-repo
+      - name: Use Node.js v16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: yarn
+      - run: yarn build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: stats
+          path: artifact/webpack-stats.json
+
+#  check-diff:
+#    runs-on: ubuntu-latest
+#    needs: [master-bundle, current-branch-bundle]
+#    steps:
+#      - name: Use Node.js v16.x
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 16.x
+#      - run: yarn add global webpack-bundle-diff
+#      - uses: actions/download-artifact@v2
+#        with:
+#          name: my-artifact
+#      - run: wbd diff master-stats.json
