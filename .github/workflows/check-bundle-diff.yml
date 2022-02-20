@@ -12,17 +12,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: master
-          path: master-repo
       - name: Use Node.js v16.x
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-      - run: yarn
-      - run: yarn build
+      - run: | 
+          yarn
+          yarn build
+      - run: mv artifacts/webpack-stats.json artifacts/webpack-stats-base.json
       - uses: actions/upload-artifact@v2
         with:
           name: stats
-          path: artifact/webpack-stats.json
+          path: frontend/artifacts/webpack-stats-base.json
 
   current-branch-bundle:
     runs-on: ubuntu-latest
@@ -31,18 +32,17 @@ jobs:
         working-directory: frontend
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: current-branch-repo
       - name: Use Node.js v16.x
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-      - run: yarn
-      - run: yarn build
+      - run: |
+          yarn
+          yarn build
       - uses: actions/upload-artifact@v2
         with:
           name: stats
-          path: artifact/webpack-stats.json
+          path: frontend/artifacts/webpack-stats.json
 
 #  check-diff:
 #    runs-on: ubuntu-latest
