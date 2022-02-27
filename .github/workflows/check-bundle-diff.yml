@@ -1,0 +1,82 @@
+name: Check Bundle Diff
+
+on: [ push ]
+
+jobs:
+  master-bundle:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Use Node.js v16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: | 
+          yarn
+          yarn build
+      - run: mv artifacts/webpack-stats.json artifacts/webpack-stats-base.json
+      - uses: actions/upload-artifact@v2
+        with:
+          name: stats
+          path: frontend/artifacts/webpack-stats-base.json
+
+  current-branch-bundle:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js v16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: |
+          yarn
+          yarn build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: stats
+          path: frontend/artifacts/webpack-stats.json
+
+  check-diff:
+    runs-on: ubuntu-latest
+    needs: [master-bundle, current-branch-bundle]
+    steps:
+      - name: Use Node.js v16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: npm install -g webpack-bundle-diff
+      - uses: actions/download-artifact@v2
+        with:
+          name: stats
+      - run: wbd diff webpack-stats.json webpack-stats-base.json -o output.json
+      - name: Check bundle diff
+        run: |
+          const fs = require('fs');
+  
+          fs.readFile('output.json', (err, data) => {
+            if (err) {
+              throw err
+            }
+
+            const stats = JSON.parse(data)
+            for (let key in stats) {
+              let stat = stats[key]
+              if (!Array.isArray(stat['added']) || !Array.isArray(stat['removed']) || !Array.isArray(stat['changed'])) {
+                throw new Error(`Why stats of this key is not Array? added: ${stat['added']}, removed: ${stat['removed']}, changed: ${stat['changed']}`)
+              }
+  
+              if (stat['delta'] || stat['added'].length > 0 || stat['removed'].length > 0 || stat['changed'].length > 0) {
+                throw new Error('this artifact is different from HEAD')
+              }
+            }
+          })
+        shell: node {0}
+
