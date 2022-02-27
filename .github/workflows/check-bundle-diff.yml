@@ -57,4 +57,26 @@ jobs:
         with:
           name: stats
       - run: wbd diff webpack-stats.json webpack-stats-base.json -o output.json
-      - run: cat output.json
+      - name: Check bundle diff
+        run: |
+          const fs = require('fs');
+  
+          fs.readFile('output.json', (err, data) => {
+            if (err) {
+              throw err
+            }
+
+            const stats = JSON.parse(data)
+            for (let key in stats) {
+              let stat = stats[key]
+              if (!Array.isArray(stat['added']) || !Array.isArray(stat['removed']) || !Array.isArray(stat['changed'])) {
+                throw new Error(`Why stats of this key is not Array? added: ${stat['added']}, removed: ${stat['removed']}, changed: ${stat['changed']}`)
+              }
+  
+              if (stat['delta'] || stat['added'].length > 0 || stat['removed'].length > 0 || stat['changed'].length > 0) {
+                throw new Error('this artifact is different from HEAD')
+              }
+            }
+          })
+        shell: node {0}
+
