@@ -13,7 +13,7 @@ jobs:
         with:
           ref: master
       - name: Use Node.js v16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - run: | 
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js v16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - run: |
@@ -49,7 +49,7 @@ jobs:
     needs: [master-bundle, current-branch-bundle]
     steps:
       - name: Use Node.js v16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - run: npm install -g webpack-bundle-diff
