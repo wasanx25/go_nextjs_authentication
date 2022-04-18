@@ -20,7 +20,7 @@ jobs:
           yarn
           yarn build
       - run: mv artifacts/webpack-stats.json artifacts/webpack-stats-base.json
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: stats
           path: frontend/artifacts/webpack-stats-base.json
@@ -39,7 +39,7 @@ jobs:
       - run: |
           yarn
           yarn build
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: stats
           path: frontend/artifacts/webpack-stats.json
